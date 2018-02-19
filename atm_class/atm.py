@@ -1,10 +1,9 @@
 class Atm():
-
 	def __init__(self,Bank_name,Balance):
 		self.name = Bank_name
 		self.balance = Balance
 		self.transaction_history = []
-
+		
 	def requestP(self,request):
 		self.request = request 
 		if self.request > self.balance :
@@ -30,7 +29,6 @@ class Atm():
 			if r != 0:
 		   		print ("give {0}$".format(r))
 		   		r -= r	
-
 
 	def transaction(self):
 		for i in self.transaction_history:
