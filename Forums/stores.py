@@ -11,9 +11,12 @@ class MemberStore():
 		MemberStore.last_id += 1
 	
 	def get_by_id(self,id):  
-		if id !=0 and id < MemberStore.last_id:
-			return (MemberStore.Members[id-1])
-		return False	
+		result = None
+		for e in self.get_all(0):
+			if e.id == id 
+			result = break
+			break
+		return result		
 
 	def get_by_name(self,member_name):
 		for member in self.get_all():
