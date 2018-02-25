@@ -1,41 +1,53 @@
 import models
-import stores 
+import stores
 
-member1 = models.Members("Malek",19)
-member2 = models.Members("Ahmad",15)
+def create_member():
+	member1 = models.Members("Malek",19)
+	member2 = models.Members("Ahmad",15)
+	return member1 , member2
 
+def adding_to_store(store,members):	
+	for member in members:
+		store.add(member)
+
+def get_all(store):
+	for members in store.Members:
+		return members	
+
+def get_by_id(store,member):
+	store.get_by_id(member.id)
+
+def get_by_name(store,name):
+	return store.get_by_name(name)	
+
+def update_member(store,member):
+	member_copy = models.Members(member.name,member.age)
+	member_copy.id = 3
+	if member_copy is not member:
+		print("{0} and {1} are not matching".format(member,member_copy))		
+	print(member_copy)
+	member_copy.name = "Malek"
+	store.update(member_copy)
+	print(store.get_by_id(member.id))
+def delete_member_by_id(store,id):
+	try:
+		store.delete(id)
+	except ValueError:
+		print("It should be  an existence entity before deleting!")
+
+#---------------------------
+members_inc = create_member()
+member1,member2 = members_inc
 store = stores.MemberStore()
-store.add(member1)
-store.add(member2)
 
-print store.get_all()
-print store.get_by_id(1)
-print store.get_by_id(2)
+adding_to_store(store,members_inc)
+get_by_id(store,member1)
+get_by_name(store,"Malek")
+print get_all(store)
 
-print store.entity_exist(member1)
-print store.entity_exist(member2)
+update_member(store,member2)
+delete_member_by_id(store,2)
 
-store.delete(1)
-store.update(member2)
-print store.get_all()
-#--------------
-post1 = models.Post("welcome","Today i will talk about security")
-post2 = models.Post("Hello","it is raining today!")
-post3 = models.Post("Hi","How are u today!")
-
-post_store = stores.PostStore()
-post_store.add(post1)
-post_store.add(post2)
-post_store.add(post3)
-
-print post_store.get_all()
-
-print post_store.get_by_id(1)
-print post_store.get_by_id(2)
-print post_store.get_by_id(3)
-
-post_store.delete_post(1)
-print post_store.get_all()
-
+#-------- post ---------------
 
 
