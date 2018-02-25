@@ -3,17 +3,24 @@ class MemberStore():
 	last_id = 1
 
 	def get_all(self):
-		return MemberStore.Member_database
+		return MemberStore.Members
 	
 	def add(self,member):
 		member.id = MemberStore.last_id
-		MemberStore.Member_database.append(member)
+		MemberStore.Members.append(member)
 		MemberStore.last_id += 1
 	
 	def get_by_id(self,id):  
 		if id !=0 and id < MemberStore.last_id:
-			return (MemberStore.Member_database[id-1])
+			return (MemberStore.Members[id-1])
+		return False	
+
+	def get_by_name(self,member_name):
+		for member in self.get_all():
+			if member.name == str(member_name):
+				return member
 		return False		
+		
 	
 	def delete(self,id):
 		member_id = self.get_all()
