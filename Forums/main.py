@@ -4,6 +4,8 @@ import stores
 def create_member():
 	member1 = models.Members("Malek",19)
 	member2 = models.Members("Ahmad",15)
+	print(member1)
+	print(member2)
 	return member1 , member2
 
 def adding_to_store(store,members):	
