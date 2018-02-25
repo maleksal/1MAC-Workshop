@@ -1,5 +1,5 @@
 class MemberStore():
-	Member_database = []
+	Members = []
 	last_id = 1
 
 	def get_all(self):
