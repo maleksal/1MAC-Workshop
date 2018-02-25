@@ -33,7 +33,7 @@ class MemberStore():
 	def entity_exist(self,member):
 		for e in self.get_all():
 			if str(e) == str(member):
-				return ("{} exist".format(str(e)))
+				return True
 		return 	False
 
 	def update(self, member):
