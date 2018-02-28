@@ -42,6 +42,12 @@ def get_members_with_posts(member_store,post_store):
 		print("{} has posted: \t".format(members_post.name))
 		for posts in members_post.posts:
 			print("\t{}\n".format(posts))
+def get_top_two(member_store,post_store):
+	top_two_members = member_store.get_top_two(post_store.get_all())
+	for member_post in top_two_members:
+		print("{} has posted: \t".format(member_post.name))
+		for posts in member_post.posts:
+			print("\t{}\n".format(posts))				
 #-----------------------------
 
 def create_post(members_instance):
@@ -55,19 +61,6 @@ def create_post(members_instance):
 def storing_posts(post_instances,post_store):
 	for post in post_instances:
 		post_store.add(post)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #---------------------------
 members_inc = create_member()
@@ -84,7 +77,8 @@ post_inc = create_post(members_inc)
 post1,post2,post3,post4,post5 = post_inc
 post_store = stores.PostStore()
 storing_posts(post_inc,post_store)
-get_members_with_posts(store,post_store)
+#get_members_with_posts(store,post_store)
+get_top_two(store,post_store)
 #----------------------------
 
 

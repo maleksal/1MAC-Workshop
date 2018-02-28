@@ -49,6 +49,11 @@ class MemberStore():
 				member.posts.append(post)
 		for member in all_members:
 			yield member	
+	def get_top_two(self, all_posts):
+		all_members_posts = list(self.get_members_with_post(all_posts))
+		all_members_posts.sort(key=lambda x: len(x.posts), reverse=True)
+		yield all_members_posts[0]
+		yield all_members_posts[1]
 
 		
 #-------------Post Store------------------------
