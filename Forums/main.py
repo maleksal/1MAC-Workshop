@@ -36,20 +36,55 @@ def delete_member_by_id(store,id):
 		store.delete(id)
 	except ValueError:
 		print("It should be  an existence entity before deleting!")
+def get_members_with_posts(member_store,post_store):
+	member_with_posts = member_store.get_members_with_post(post_store.get_all())
+	for members_post in member_with_posts:
+		print("{} has posted: \t".format(members_post.name))
+		for posts in members_post.posts:
+			print("\t{}\n".format(posts))
+#-----------------------------
+
+def create_post(members_instance):
+	post1 =models.Post("hello","How are you every body",members_instance[0].id)
+	post2 = models.Post("hello","How are you every body",members_instance[1].id) 
+	post3 = models.Post("hello","How are you every body",members_instance[0].id) 
+	post4 =  models.Post("hello","How are you every body",members_instance[0].id) 
+	post5 =  models.Post("hello","How are you every body",members_instance[1].id)
+	return post1,post2,post3,post4,post5
+
+def storing_posts(post_instances,post_store):
+	for post in post_instances:
+		post_store.add(post)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #---------------------------
 members_inc = create_member()
 member1,member2 = members_inc
 store = stores.MemberStore()
-
 adding_to_store(store,members_inc)
 get_by_id(store,member1)
 get_by_name(store,"Malek")
 print get_all(store)
-
-update_member(store,member2)
-delete_member_by_id(store,2)
-
-#-------- post ---------------
+#update_member(store,member2)
+#delete_member_by_id(store,2)
+create_post(members_inc)
+post_inc = create_post(members_inc)
+post1,post2,post3,post4,post5 = post_inc
+post_store = stores.PostStore()
+storing_posts(post_inc,post_store)
+get_members_with_posts(store,post_store)
+#----------------------------
 
 

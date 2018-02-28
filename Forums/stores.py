@@ -1,3 +1,4 @@
+import itertools
 class MemberStore():
 	Members = []
 	last_id = 1
@@ -12,17 +13,14 @@ class MemberStore():
 	
 	def get_by_id(self,id):  
 		result = None
-		for e in self.get_all(0):
-			if e.id == id 
-			result = break
+		for e in self.get_all():
+			if e.id == id :
+				result = e 
 			break
 		return result		
 
 	def get_by_name(self,member_name):
-		for member in self.get_all():
-			if member.name == str(member_name):
-				return member
-		return False		
+		return (member for member in self.get_all() if member.name == member_name)		
 		
 	
 	def delete(self,id):
@@ -43,6 +41,16 @@ class MemberStore():
 			if user.id == member.id:
 				all_members[index] = member
 				break
+
+	def get_members_with_post(self,all_posts):
+		all_members = self.get_all()
+		for member , post in itertools.product(all_members,all_posts):
+			if member.id == post.member_id:
+				member.posts.append(post)
+		for member in all_members:
+			yield member	
+
+		
 #-------------Post Store------------------------
 
 class PostStore():
@@ -66,3 +74,6 @@ class PostStore():
 		posts = self.get_all()
 		posts.remove(self.get_by_id(id))
 		PostStore.last_id -= 1
+
+	
+
