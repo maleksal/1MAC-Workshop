@@ -1,46 +1,47 @@
 import itertools
-class MemberStore():
+__metaclass__ = type
+class BaseStore():
+
+	def __init__(self,data_provider ,last_id):
+		self._data_provider = data_provider
+		self._last_id = last_id
+	
+	def get_all(self):
+		return self._data_provider
+	
+	def add(self,item_instance):
+		item_instance.id = self._last_id
+		self._data_provider.append(item_instance)
+		self._last_id += 1 
+
+	def get_by_id(self,id):
+		return (item for item in self.get_all() if item.id == id )
+
+	def entity_exist(self,item):
+		if item == self.get_by_id(item.id):
+			return True
+		return False	
+	def delete(self,id):
+		return (self._data_provider.remove(self.get_by_id(id)))					
+
+	def update(self, item):
+		result = item
+		all_items = self.get_all()
+		for index, current_item in enumerate(all_items):
+		    if current_item.id == item.id:
+		    	all_items[index] = item
+		    	break
+		return result
+
+class MemberStore(BaseStore):
 	Members = []
 	last_id = 1
 
-	def get_all(self):
-		return MemberStore.Members
-	
-	def add(self,member):
-		member.id = MemberStore.last_id
-		MemberStore.Members.append(member)
-		MemberStore.last_id += 1
-	
-	def get_by_id(self,id):  
-		result = None
-		for e in self.get_all():
-			if e.id == id :
-				result = e 
-			break
-		return result		
+	def __init__(self):
+		super(MemberStore,self).__init__(MemberStore.Members,MemberStore.last_id)
 
 	def get_by_name(self,member_name):
 		return (member for member in self.get_all() if member.name == member_name)		
-		
-	
-	def delete(self,id):
-		member_id = self.get_all()
-		member_id.remove(self.get_by_id(id))
-		MemberStore.last_id -= 1
-
-	def entity_exist(self,member):
-		for e in self.get_all():
-			if str(e) == str(member):
-				return True
-		return 	False
-
-	def update(self, member):
-		result = member
-		all_members = self.get_all()
-		for index, user in enumerate(all_members):
-			if user.id == member.id:
-				all_members[index] = member
-				break
 
 	def get_members_with_post(self,all_posts):
 		all_members = self.get_all()
@@ -58,27 +59,19 @@ class MemberStore():
 		
 #-------------Post Store------------------------
 
-class PostStore():
+class PostStore(BaseStore):
 	Posts = []
 	last_id = 1
 
-	def get_by_id(self,id):
-		if id != 0 and id < PostStore.last_id:
-			return (PostStore.Posts[id-1])
-		return False	
-		
-	def get_all(self):
-		return PostStore.Posts
+	def __init__(self):
+		super(PostStore,self).__init__(PostStore.Posts,PostStore.last_id)
+	def get_posts_by_date(self):
+		all_posts = self.get_all() [:]
+		all_posts.sort(key=lambda x: x.date, reverse=True)
+		for post in all_posts:
+		    yield post
 
-	def add (self,post):
-		post.id = PostStore.last_id
-		self.Posts.append(post)	
-	  	PostStore.last_id += 1
 	
-	def delete_post(self,id):
-		posts = self.get_all()
-		posts.remove(self.get_by_id(id))
-		PostStore.last_id -= 1
 
 	
 

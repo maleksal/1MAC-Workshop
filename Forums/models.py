@@ -1,3 +1,4 @@
+from datetime import datetime
 class Members():
 	def __init__(self,username,age):
 		self.name = username
@@ -12,6 +13,7 @@ class Post():
 		self.title = title 
 		self.content = content
 		self.id =0
+		self.datetime = datetime.now()
 		self.member_id= member_id
 	def __str__(self):
-		return ("Title: {} , Content: {}".format(self.title,self.content))
+		return ("Title: {} , Content: {} , Date: {}".format(self.title,self.content,self.datetime))
