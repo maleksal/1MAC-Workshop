@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" type="text/css" href="static/css/util.css">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/css-hamburgers/hamburgers.min.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/animsition/css/animsition.min.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="static/vendor/daterangepicker/daterangepicker.css">
+  <title>Creat Post</title>
+</head>
+<body>
+    <form action="{{ url_for('add_post') }}" method="post">
+      <div class="wrap-input100 validate-input" data-validate = "Please enter your phone">
+        <input class="input100" type="text" name="Title" placeholder="Title">
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="wrap-input100 validate-input" data-validate = "Please enter your message">
+        <input class="input100" type ="text" name="Content" placeholder="Content"></input>
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="container-contact100-form-btn">
+        <button class="contact100-form-btn">
+          <span>
+            <i  class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+            POST
+          </span>
+        </button>
+      </div>
+
+    </form>
+</body>
+</html>
